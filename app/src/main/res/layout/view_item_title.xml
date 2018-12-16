@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/vit_title"
+        style="@style/titlestyle"/>
+    <ImageView
+        android:background="@mipmap/back"
+        android:id="@+id/vit_back"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:textSize="35dp"
+        android:layout_width="20dp"
+        android:layout_height="35dp" />
+
+</RelativeLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:Steward="http://schemas.android.com/apk/res/per.hxl.stewardtokgo"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.AccountActivity">
+    <per.hxl.stewardtokgo.view.TitleItenView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        Steward:mytitle ="个人信息">
+    </per.hxl.stewardtokgo.view.TitleItenView>
+
+    <per.hxl.stewardtokgo.view.InfroItemView
+        android:id="@+id/account_email"
+        Steward:infrotitle="邮箱"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </per.hxl.stewardtokgo.view.InfroItemView>
+    <per.hxl.stewardtokgo.view.InfroItemView
+        android:id="@+id/account_nick"
+        Steward:infrotitle="昵称"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </per.hxl.stewardtokgo.view.InfroItemView>
+
+    <per.hxl.stewardtokgo.view.InfroItemView
+        android:id="@+id/account_xcoin"
+        Steward:infrotitle="星币"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </per.hxl.stewardtokgo.view.InfroItemView>
+
+
+
+</LinearLayout>

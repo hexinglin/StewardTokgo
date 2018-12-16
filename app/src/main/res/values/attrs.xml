@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="per.hxl.stewardtokgo.view.SettingItemView">
+        <attr name="destitle" format="string"/>
+        <attr name="desoff" format="string"/>
+        <attr name="deson" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="per.hxl.stewardtokgo.view.InfroItemView">
+        <attr name="infrotitle" format="string"/>
+        <attr name="infronum" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="per.hxl.stewardtokgo.view.TitleItenView">
+        <attr name="mytitle" format="string"/>
+    </declare-styleable>
+</resources>
