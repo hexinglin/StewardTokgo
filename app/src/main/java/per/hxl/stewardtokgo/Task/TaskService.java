@@ -13,6 +13,11 @@ import android.util.Log;
 
 import java.util.List;
 
+import okhttp3.FormBody;
+import per.hxl.stewardtokgo.Net.HttpUtil;
+import per.hxl.stewardtokgo.Net.TokgoCallback;
+import per.hxl.stewardtokgo.utils.ConstantValue;
+
 import static per.hxl.stewardtokgo.utils.ConstantValue.BUGTAG;
 
 /**
@@ -21,11 +26,15 @@ import static per.hxl.stewardtokgo.utils.ConstantValue.BUGTAG;
 
 public class TaskService extends Service {
 
+    private static int  DEALYTIME_MS = 1000; //单位毫秒
+
+    private static int  HB_COUNT = (10*60*1000)/DEALYTIME_MS; //心跳时间10分钟
+    private static String HB_URL= ConstantValue.SERVERADRR + "/tokgo/Account/heartbeat";
+
     @Override
     public void onCreate() {
         super.onCreate();
         new taskThread().start();
-
     }
 
 
@@ -39,17 +48,32 @@ public class TaskService extends Service {
     class taskThread extends Thread{
     @Override
     public void run() {
+        int HB_NO = 0;
         while (true){
+            //检查及设置心跳
+            HB_NO = CheckHB(HB_NO+1);
             getTopApp(TaskService.this);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(DEALYTIME_MS);
             } catch (InterruptedException e) {}
-
         }
     }
-}
 
 
+    }
+
+    private int CheckHB(int no) {
+        if (no < HB_COUNT)
+            return no;
+        FormBody formBody = new FormBody.Builder().build();
+        HttpUtil.Put(HB_URL, formBody, new TokgoCallback(TaskService.this,"hb error") {
+            @Override
+            public void onResponse(String responsedata) {
+
+            }
+        });
+        return 0;
+    }
     private void getTopApp(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             UsageStatsManager m = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);

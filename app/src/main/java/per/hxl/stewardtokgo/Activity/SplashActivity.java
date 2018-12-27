@@ -17,6 +17,7 @@ import java.util.List;
 import per.hxl.stewardtokgo.Login.LoginActivity;
 import per.hxl.stewardtokgo.Login.LoginUtil;
 import per.hxl.stewardtokgo.R;
+import per.hxl.stewardtokgo.Task.TaskService;
 import per.hxl.stewardtokgo.utils.ConstantValue;
 import per.hxl.stewardtokgo.utils.SPutil;
 
@@ -65,6 +66,8 @@ public class SplashActivity extends AppCompatActivity {
                     new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),
                     MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
         }
+        //开启系统监控及心跳服务
+        startService(new Intent(getBaseContext() ,TaskService.class));
 
     }
 

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         initUI();
         //初始化数据的方法
         initData();
-        startService(new Intent(getBaseContext() ,TaskService.class));
+
 
 
     }
