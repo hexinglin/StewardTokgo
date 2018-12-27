@@ -8,15 +8,19 @@ public class ConstantValue {
     //程序是否调试
     public static final Boolean IsBug = false;
     //程序调试TAG
-    public static final String BUGTAG = "TOKGO";
+    public static final String BUGTAG = "TAGTOKGO";
 
-//    public static final String SERVERADRR = "http://3c07b6566169b974.natapp.cc";
+    public static final String SERVERADRR = "http://3c07b6566169b974.natapp.cc";
 
-    public static final String SERVERADRR = "http://118.24.6.171:8080";
+//    public static final String SERVERADRR = "http://118.24.6.171:8080";
     //程序剩余时间
     public static final String FREETIME = "freetime";
-    //系统最后一次跟新时间
-    public static final String LASTUPDETETIME = "lastupdetetime";
+    //用户token
+    public static final String USER_TOKEN = "usertoken";
+    //用户账号
+    public static final String USER_ACCOUNT = "useraccount";
+    //用户密码
+    public static final String USER_PASSWORD = "userpassword";
     //显示悬浮窗
     public static final String SHOWSUSPENSIONWINDOW = "shosuspensionwindow";
     //程序锁监控

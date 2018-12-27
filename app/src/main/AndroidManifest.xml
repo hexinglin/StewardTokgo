@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="per.hxl.stewardtokgo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -22,11 +31,17 @@
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.SettingActivity" />
         <activity android:name=".Activity.AccountActivity" />
-        <activity android:name=".Activity.WordLearnActivity"/>
+        <activity android:name=".Activity.WordLearnActivity" />
 
+        <service android:name=".Task.TaskService" />
 
+        <activity
+            android:name=".Login.LoginActivity"
+            android:label="@string/title_activity_login" />
 
-
+        <service
+            android:name=".Login.LoginIntentService"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -2,19 +2,16 @@ package per.hxl.stewardtokgo.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import per.hxl.stewardtokgo.R;
+import per.hxl.stewardtokgo.Task.TaskService;
 import per.hxl.stewardtokgo.utils.ConstantValue;
 import per.hxl.stewardtokgo.utils.SPutil;
 
@@ -32,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
         initUI();
         //初始化数据的方法
         initData();
+        startService(new Intent(getBaseContext() ,TaskService.class));
+
+
     }
-
-
 
     private void initUI() {
         gv_list = (GridView) findViewById(R.id.gv_home);
