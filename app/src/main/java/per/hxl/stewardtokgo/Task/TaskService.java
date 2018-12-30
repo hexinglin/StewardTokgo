@@ -1,13 +1,15 @@
 package per.hxl.stewardtokgo.Task;
 
-import android.app.ActivityManager;
 import android.app.Service;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -31,10 +33,20 @@ public class TaskService extends Service {
     private static int  HB_COUNT = (10*60*1000)/DEALYTIME_MS; //心跳时间10分钟
     private static String HB_URL= ConstantValue.SERVERADRR + "/tokgo/Account/heartbeat";
 
+    private ContentObserver mObserver;
+
+
+
+
+
     @Override
     public void onCreate() {
         super.onCreate();
         new taskThread().start();
+
+        mObserver = new SMSContentObserver(TaskService.this);
+        getContentResolver().registerContentObserver(SMSContentObserver.SMS_INBOX_URL, true, mObserver);
+
     }
 
 
@@ -52,6 +64,7 @@ public class TaskService extends Service {
         while (true){
             //检查及设置心跳
             HB_NO = CheckHB(HB_NO+1);
+//            mObserver.c
             getTopApp(TaskService.this);
             try {
                 Thread.sleep(DEALYTIME_MS);
@@ -103,5 +116,12 @@ public class TaskService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //这个时候就取消这个内容观察者,
+        getContentResolver().unregisterContentObserver(mObserver);
     }
 }

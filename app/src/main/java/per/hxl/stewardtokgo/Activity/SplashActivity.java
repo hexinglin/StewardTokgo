@@ -1,14 +1,19 @@
 package per.hxl.stewardtokgo.Activity;
 
+import android.Manifest;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 
 import java.util.ArrayList;
@@ -60,15 +65,18 @@ public class SplashActivity extends AppCompatActivity {
 //        //开启程序锁服务
 //        if (SPutil.getBoolean(this, ConstantValue.OPENCLOSEAPPLOCK,false))
 //            startService(new Intent(this,LockService.class));
+        getPermission();
+
+
+    }
+
+    private void getPermission() {
         if (!hasPermission()) {
             //若用户未开启权限，则引导用户开启“Apps with usage access”权限
             startActivityForResult(
                     new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),
                     MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
         }
-        //开启系统监控及心跳服务
-        startService(new Intent(getBaseContext() ,TaskService.class));
-
     }
 
     /***
@@ -95,6 +103,7 @@ public class SplashActivity extends AppCompatActivity {
 
     //检测用户是否对本app开启了“Apps with usage access”权限
     private boolean hasPermission() {
+        setPermissions();
         AppOpsManager appOps = (AppOpsManager)
                 getSystemService(Context.APP_OPS_SERVICE);
         int mode = 0;
@@ -116,8 +125,22 @@ public class SplashActivity extends AppCompatActivity {
                         new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),
                         MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
             }
+
         }
     }
+    static final String[] PERMISSION = new String[]{
+            Manifest.permission.READ_SMS,
+    };
+
+    private void setPermissions() {
+        if (ContextCompat.checkSelfPermission(SplashActivity.this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            //Android 6.0申请权限
+            ActivityCompat.requestPermissions(this,PERMISSION,1);
+        }else{
+            Log.i(ConstantValue.BUGTAG,"权限申请ok");
+        }
+    }
+
 
 
     class DeayTime extends Thread{
