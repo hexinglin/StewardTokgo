@@ -23,7 +23,7 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     private void initNet() {
-        HttpUtil.Get(ConstantValue.SERVERADRR + "/tokgo/account/getinfro?acount=" + account, new TokgoCallback() {
+        HttpUtil.Get(ConstantValue.SERVERADRR + "/tokgo/account/getinfro", new TokgoCallback() {
             @Override
             public void onResponse(final String responsedata) {
                 runOnUiThread(new Runnable() {

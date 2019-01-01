@@ -12,8 +12,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.READ_SMS"/>
-
+    <uses-permission android:name="android.permission.READ_SMS" />
 
     <application
         android:allowBackup="true"
@@ -33,7 +32,7 @@
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.SettingActivity" />
         <activity android:name=".Activity.AccountActivity" />
-        <activity android:name=".Activity.WordLearnActivity" />
+        <activity android:name=".Word.WordLearnActivity" />
 
         <service android:name=".Task.TaskService" />
 
@@ -44,6 +43,8 @@
         <service
             android:name=".Login.LoginIntentService"
             android:exported="false" />
+
+        <activity android:name=".Word.WordChangeActivity"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,13 @@
-package per.hxl.stewardtokgo.Activity;
+package per.hxl.stewardtokgo.Word;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,6 +21,7 @@ import okhttp3.FormBody;
 import per.hxl.stewardtokgo.Net.HttpUtil;
 import per.hxl.stewardtokgo.Net.TokgoCallback;
 import per.hxl.stewardtokgo.R;
+import per.hxl.stewardtokgo.Task.TaskService;
 import per.hxl.stewardtokgo.utils.ConstantValue;
 
 public class WordLearnActivity extends AppCompatActivity {
@@ -23,7 +30,10 @@ public class WordLearnActivity extends AppCompatActivity {
     private boolean isRlearn;
     private Button btn_relearn;
     private Button btn_ok;
+    private TaskService taskService;
 
+    private static String WORD_APP_LOCAL = "com.xdf.recite";
+    private static Integer LEARN_TIME = 180;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +42,23 @@ public class WordLearnActivity extends AppCompatActivity {
         inintBtn();
         //获得单词
         getWord();
-
+        //绑定Service
+        bindService(new Intent(getBaseContext() ,TaskService.class), conn, Context.BIND_AUTO_CREATE);
     }
 
     private void inintBtn() {
-        btn_ok = (Button)findViewById(R.id.wl_btn_ok);
-        btn_relearn = (Button)findViewById(R.id.wl_btn_relearn);
+        btn_ok = (Button)findViewById(R.id.wl_btn_finish);
+        btn_relearn = (Button)findViewById(R.id.wl_btn_again);
+        findViewById(R.id.wl_btn_begin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (taskService!=null) {
+                    taskService.addApplication(WORD_APP_LOCAL);
+                    Toast.makeText(WordLearnActivity.this, "开始学习，请打开学习界面", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         btn_relearn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +82,9 @@ public class WordLearnActivity extends AppCompatActivity {
                                         Toast.makeText(WordLearnActivity.this, jsonheader.getString("msg"), Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (Exception e) {
+                                    Looper.prepare();
                                     Toast.makeText(WordLearnActivity.this, "data structure error ", Toast.LENGTH_SHORT).show();
+                                    Looper.loop();
                                 }
                             }
                         });
@@ -72,6 +95,14 @@ public class WordLearnActivity extends AppCompatActivity {
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (taskService == null){
+                    return;
+                }
+
+                if (taskService.getResult(WORD_APP_LOCAL)< LEARN_TIME){
+                    Toast.makeText(WordLearnActivity.this, "学习时间不足，请认真学习"+taskService.getResult(WORD_APP_LOCAL), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 //构建FormBody，传入要提交的参数
                 FormBody formBody = new FormBody.Builder()
                         .add("id", wordid.toString()).build();
@@ -156,4 +187,16 @@ public class WordLearnActivity extends AppCompatActivity {
         });
 
     }
+    private ServiceConnection conn = new ServiceConnection() {
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            //返回一个MsgService对象
+            taskService = ((TaskService.MsgBinder)service).getService();
+        }
+    };
 }

@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSONObject;
 
 import okhttp3.FormBody;
-import per.hxl.stewardtokgo.Activity.WordLearnActivity;
 import per.hxl.stewardtokgo.Net.HttpUtil;
 import per.hxl.stewardtokgo.Net.TokgoCallback;
 import per.hxl.stewardtokgo.utils.ConstantValue;
