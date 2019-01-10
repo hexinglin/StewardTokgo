@@ -9,8 +9,6 @@ import android.database.ContentObserver;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
-import android.util.Log;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +17,8 @@ import java.util.Map;
 import okhttp3.FormBody;
 import per.hxl.stewardtokgo.Net.HttpUtil;
 import per.hxl.stewardtokgo.Net.TokgoCallback;
+import per.hxl.stewardtokgo.Word.WordLearnActivity;
+import per.hxl.stewardtokgo.Word.WordLearnShow;
 import per.hxl.stewardtokgo.utils.ConstantValue;
 
 /**
@@ -40,7 +40,6 @@ public class TaskService extends Service {
     private String nowActivity="";
 
     Map<String,ApplicationInfo> applicationInfoMap = new HashMap<>();
-
 
 
 
@@ -124,6 +123,12 @@ public class TaskService extends Service {
         applicationInfoMap.put(application,applicationInfo);
     }
 
+
+    public void addApplication(String application,PopupWindow popupWindow){
+        ApplicationInfo applicationInfo = new ApplicationInfo(application,popupWindow);
+        applicationInfoMap.put(application,applicationInfo);
+    }
+
     public void addApplication(String application,Integer maxCount){
         ApplicationInfo applicationInfo = new ApplicationInfo(application,maxCount);
         applicationInfoMap.put(application,applicationInfo);
@@ -166,10 +171,17 @@ public class TaskService extends Service {
         private int count = 0;
         private int maxcount = 0;
         private boolean isContinuous = false;
+        private PopupWindow popupWindow = null;
+
 
         public ApplicationInfo(String applicationName) {
             this.applicationName = applicationName;
             this.isContinuous = false;
+        }
+        public ApplicationInfo(String applicationName,PopupWindow popupWindow) {
+            this.applicationName = applicationName;
+            this.isContinuous = false;
+            this.popupWindow = popupWindow;
         }
 
         public ApplicationInfo(String applicationName, int maxcount) {
@@ -197,7 +209,9 @@ public class TaskService extends Service {
             else {
                 count++;
             }
-
+            if (popupWindow != null) {
+                popupWindow.setInfro(count);
+            }
         }
     }
 

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_corner">
+    <ImageView
+        android:layout_width="30sp"
+        android:layout_height="30sp"
+        android:layout_marginTop="6dp"
+        android:background="@mipmap/icon" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 正在学习单词: "
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/lwt_english"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5sp"
+                android:text="english"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="10sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="3dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 学习时间: "
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/lwt_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="321 s"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

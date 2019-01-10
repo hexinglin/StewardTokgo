@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.WindowManager;
 
 
 import java.util.ArrayList;
@@ -36,6 +37,10 @@ public class SplashActivity extends AppCompatActivity {
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
+            if (!IsReady){
+                finish();
+                return;
+            }
             Intent intent;
             switch (msg.what){
                 case 0:intent = new Intent(SplashActivity.this,MainActivity.class);
@@ -55,7 +60,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         initSystemService();
         new DeayTime().start();
-        finish();
     }
 
     /**
@@ -76,6 +80,13 @@ public class SplashActivity extends AppCompatActivity {
             startActivityForResult(
                     new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),
                     MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
+        }
+        else if (!Settings.canDrawOverlays(this)) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+            startActivity(intent);
+        }
+        else {
+            IsReady = true;
         }
     }
 
@@ -133,6 +144,7 @@ public class SplashActivity extends AppCompatActivity {
     };
 
     private void setPermissions() {
+
         if (ContextCompat.checkSelfPermission(SplashActivity.this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             //Android 6.0申请权限
             ActivityCompat.requestPermissions(this,PERMISSION,1);
@@ -146,6 +158,12 @@ public class SplashActivity extends AppCompatActivity {
     class DeayTime extends Thread{
         @Override
         public void run() {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             String account = SPutil.getString(SplashActivity.this, ConstantValue.USER_ACCOUNT, "");
             String password = SPutil.getString(SplashActivity.this, ConstantValue.USER_PASSWORD, "");
             boolean isok = LoginUtil.login(account,password,SplashActivity.this);

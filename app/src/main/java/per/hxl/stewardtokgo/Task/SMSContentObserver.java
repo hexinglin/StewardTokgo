@@ -46,7 +46,7 @@ public class SMSContentObserver extends ContentObserver {
     public void CheckSMS(){
         Cursor c = mContext.getContentResolver().query(SMS_INBOX_URL, new String[] {"thread_id",
                         "date", "address", "body" }, "address=? and date>?",
-                new String[] { "95555" ,lastDate} , "date asc"); //按日期【排序  最后条记录应该在最上面  desc 从大到小    asc小到大
+                new String[] { "95588" ,lastDate} , "date asc"); //按日期【排序  最后条记录应该在最上面  desc 从大到小    asc小到大
         if (c != null) {
             String date ="0";
             while(c.moveToNext()) {

@@ -2,6 +2,7 @@ package per.hxl.stewardtokgo.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,7 @@ import per.hxl.stewardtokgo.R;
 import per.hxl.stewardtokgo.Task.TaskService;
 import per.hxl.stewardtokgo.Word.WordChangeActivity;
 import per.hxl.stewardtokgo.Word.WordLearnActivity;
-import per.hxl.stewardtokgo.utils.ConstantValue;
-import per.hxl.stewardtokgo.utils.SPutil;
+import per.hxl.stewardtokgo.Word.WordLearnShow;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private GridView gv_list;
     private String[] mTitleStr;
     private int[] mDrawableIds;
+    WordLearnShow wordLearnShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         initData();
         //开启系统监控及心跳服务
         startService(new Intent(getBaseContext() ,TaskService.class));
-
     }
 
     private void initUI() {
@@ -58,8 +58,10 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 2:startActivity(new Intent(getBaseContext(),WordLearnActivity.class));
                         break;
-//                    case 3:startActivity(new Intent(getBaseContext(),PayActivity.class));
-//                        break;
+                    case 3:
+//                        startActivity(new Intent(getBaseContext(),PayActivity.class));
+                        wordLearnShow.show("");
+                        break;
 //                    case 4:startActivity(new Intent(getBaseContext(), TaskActivity.class));
 //                        break;
 //                    case 5:startActivity(new Intent(getBaseContext(), MapActivity.class));

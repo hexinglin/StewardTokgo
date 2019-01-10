@@ -163,7 +163,7 @@ public class LoginActivity extends AppCompatActivity{
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
+            // show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
@@ -269,9 +269,6 @@ public class LoginActivity extends AppCompatActivity{
 
         @Override
         protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
             if (success) {
                 startActivity(new Intent(LoginActivity.this,MainActivity.class));
                 finish();
@@ -279,6 +276,10 @@ public class LoginActivity extends AppCompatActivity{
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
+            mAuthTask = null;
+            showProgress(false);
+
+
         }
 
         @Override

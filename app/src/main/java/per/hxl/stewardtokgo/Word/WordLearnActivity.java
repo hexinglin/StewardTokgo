@@ -31,8 +31,9 @@ public class WordLearnActivity extends AppCompatActivity {
     private Button btn_relearn;
     private Button btn_ok;
     private TaskService taskService;
+    private WordLearnShow wordLearnShow = null;
 
-    private static String WORD_APP_LOCAL = "com.xdf.recite";
+    public static String WORD_APP_LOCAL = "com.xdf.recite";
     private static Integer LEARN_TIME = 180;
 
     @Override
@@ -42,6 +43,8 @@ public class WordLearnActivity extends AppCompatActivity {
         inintBtn();
         //获得单词
         getWord();
+
+        wordLearnShow = new WordLearnShow(getBaseContext());
         //绑定Service
         bindService(new Intent(getBaseContext() ,TaskService.class), conn, Context.BIND_AUTO_CREATE);
     }
@@ -53,9 +56,17 @@ public class WordLearnActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (taskService!=null) {
-                    taskService.addApplication(WORD_APP_LOCAL);
-                    Toast.makeText(WordLearnActivity.this, "开始学习，请打开学习界面", Toast.LENGTH_SHORT).show();
+;
+                    taskService.addApplication(WORD_APP_LOCAL,wordLearnShow);
+                    wordLearnShow.show(((TextView)findViewById(R.id.wl_english)).getText().toString().trim());
+                    /**知道要跳转应用的包命与目标Activity*/
+                    Intent studyIntent = getPackageManager().getLaunchIntentForPackage(WordLearnActivity.WORD_APP_LOCAL);
+                    if (studyIntent !=null){
+                        startActivity(getPackageManager().getLaunchIntentForPackage(WordLearnActivity.WORD_APP_LOCAL));
+                        return;
+                    }
                 }
+                Toast.makeText(getBaseContext(),"学习监控没有打开或者没有找到学习app",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -116,6 +127,7 @@ public class WordLearnActivity extends AppCompatActivity {
                                 try {
                                     JSONObject jsonheader = JSONObject.parseObject(responsedata);
                                     if(jsonheader.getInteger("code")==0){
+                                        wordLearnShow.notShow();
                                         getWord();
                                     }
                                     else {
@@ -187,6 +199,13 @@ public class WordLearnActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(conn);
+    }
+
     private ServiceConnection conn = new ServiceConnection() {
 
         @Override

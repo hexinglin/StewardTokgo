@@ -1,6 +1,7 @@
 package per.hxl.stewardtokgo.Login;
 
 import android.content.Context;
+import android.os.Looper;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
@@ -53,10 +54,12 @@ public class LoginUtil {
         new OkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                Looper.prepare();
                 if (context !=null)
                     Toast.makeText(context,"http 请求错误，检查url",Toast.LENGTH_SHORT).show();
                 isFinish = true;
                 islogin = false;
+                Looper.loop();
             }
 
             @Override
@@ -80,8 +83,27 @@ public class LoginUtil {
                 isFinish = true;
             }
         });
-        while (!isFinish);
+        WaitLogin();
         return islogin;
+    }
+
+    private static void WaitLogin() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                }
+                isFinish =true;
+            }
+        }).start();
+        while (!isFinish){
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+            }
+        }
     }
 
 }
