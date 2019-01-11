@@ -11,11 +11,17 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+import per.hxl.stewardtokgo.Net.HeartbeartService;
+import per.hxl.stewardtokgo.Net.WsManager;
 import per.hxl.stewardtokgo.R;
 import per.hxl.stewardtokgo.Task.TaskService;
 import per.hxl.stewardtokgo.Word.WordChangeActivity;
 import per.hxl.stewardtokgo.Word.WordLearnActivity;
 import per.hxl.stewardtokgo.Word.WordLearnShow;
+import per.hxl.stewardtokgo.utils.ConstantValue;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         initData();
         //开启系统监控及心跳服务
         startService(new Intent(getBaseContext() ,TaskService.class));
+        startService(new Intent(getBaseContext() ,HeartbeartService.class));
+
     }
 
     private void initUI() {

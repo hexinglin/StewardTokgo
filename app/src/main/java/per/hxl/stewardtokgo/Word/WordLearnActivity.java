@@ -33,6 +33,8 @@ public class WordLearnActivity extends AppCompatActivity {
     private TaskService taskService;
     private WordLearnShow wordLearnShow = null;
 
+
+
     public static String WORD_APP_LOCAL = "com.xdf.recite";
     private static Integer LEARN_TIME = 180;
 

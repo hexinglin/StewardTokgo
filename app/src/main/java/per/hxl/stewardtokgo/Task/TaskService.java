@@ -17,8 +17,6 @@ import java.util.Map;
 import okhttp3.FormBody;
 import per.hxl.stewardtokgo.Net.HttpUtil;
 import per.hxl.stewardtokgo.Net.TokgoCallback;
-import per.hxl.stewardtokgo.Word.WordLearnActivity;
-import per.hxl.stewardtokgo.Word.WordLearnShow;
 import per.hxl.stewardtokgo.utils.ConstantValue;
 
 /**
