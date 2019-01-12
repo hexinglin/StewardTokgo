@@ -5,6 +5,8 @@
     android:background="@drawable/shape_corner">
     <ImageView
         android:layout_width="30sp"
+        android:id="@+id/lwt_icon"
+        android:clickable="true"
         android:layout_height="30sp"
         android:layout_marginTop="6dp"
         android:background="@mipmap/icon" />

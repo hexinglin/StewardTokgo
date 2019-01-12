@@ -1,5 +1,7 @@
 package per.hxl.stewardtokgo.Word;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -58,9 +60,15 @@ public class WordLearnActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (taskService!=null) {
-;
+                    String learnWord = ((TextView)findViewById(R.id.wl_english)).getText().toString().trim();
                     taskService.addApplication(WORD_APP_LOCAL,wordLearnShow);
-                    wordLearnShow.show(((TextView)findViewById(R.id.wl_english)).getText().toString().trim());
+                    wordLearnShow.show(learnWord);
+                    // 把要学习的单词放入剪切板
+                    ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    // 将文本内容放到系统剪贴板里。
+                    if (cm != null) {
+                        cm.setPrimaryClip(ClipData.newPlainText(null, learnWord));//参数一：标签，可为空，参数二：要复制到剪贴板的文本
+                    }
                     /**知道要跳转应用的包命与目标Activity*/
                     Intent studyIntent = getPackageManager().getLaunchIntentForPackage(WordLearnActivity.WORD_APP_LOCAL);
                     if (studyIntent !=null){

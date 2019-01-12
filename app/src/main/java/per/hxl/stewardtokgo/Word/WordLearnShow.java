@@ -1,6 +1,7 @@
 package per.hxl.stewardtokgo.Word;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.view.Gravity;
@@ -43,6 +44,14 @@ public class WordLearnShow extends PopupWindow {
         tv_english.setText("");
         tv_time.setText("0s");
         timei = 0;
+
+        viewtoast.findViewById(R.id.lwt_icon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (context !=null)
+                    context.startActivity(new Intent(context,WordLearnActivity.class));
+            }
+        });
     }
 
 
