@@ -167,42 +167,42 @@ public class WordLearnActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             JSONObject jsonheader = JSONObject.parseObject(responsedata);
-                            if(jsonheader.getInteger("code")==0){
+                            int code = jsonheader.getInteger("code");
+                            if(code ==0 ){
                                 try {
 
                                     JSONObject jsondata = JSONObject.parseObject(jsonheader.getString("data"));
-                                    wordid = jsondata.getInteger("id");
+                                    wordid = jsondata.getInteger("wid");
                                     isRlearn = jsondata.getBoolean("relearn");
                                     ((TextView)findViewById(R.id.wl_english)).setText(jsondata.getString("english"));
                                     ((TextView)findViewById(R.id.wl_chinese)).setText(jsondata.getString("chinese"));
+                                    String task = "学习进度: "+jsondata.getInteger("learned")+"/"+jsondata.getInteger("total");
+                                    ((TextView)findViewById(R.id.wl_task)).setText(task);
                                     if (!isRlearn){
                                         btn_relearn.setEnabled(true);
                                     }
                                     btn_ok.setEnabled(true);
+                                    return;
 
-                                }catch (Exception e){
-                                    AlertDialog.Builder builder  = new AlertDialog.Builder(WordLearnActivity.this);
-                                    builder.setTitle("提示" ) ;
-                                    builder.setMessage("今日的学习任务已经完成了" ) ;
-                                    builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            finish();
-                                        }
-                                    });
-                                    builder.show();
-                                }
+                                }catch (Exception e){ }
 
+                            }else if(code == 20001){
+                                AlertDialog.Builder builder  = new AlertDialog.Builder(WordLearnActivity.this);
+                                builder.setTitle("提示" ) ;
+                                builder.setMessage("今日的学习任务已经完成了" ) ;
+                                builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                });
+                                builder.show();
+                                return;
                             }
-                            else {
+                            Toast.makeText(WordLearnActivity.this, jsonheader.getString("msg"), Toast.LENGTH_SHORT).show();
 
-                                Toast.makeText(WordLearnActivity.this, jsonheader.getString("msg"), Toast.LENGTH_SHORT).show();
-                            }
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            Toast.makeText(WordLearnActivity.this, "data structure error ", Toast.LENGTH_SHORT).show();
-                        }
+                        } catch (Exception e) { }
+                        Toast.makeText(WordLearnActivity.this, "data structure error ", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

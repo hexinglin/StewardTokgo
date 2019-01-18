@@ -10,7 +10,7 @@ public class ConstantValue {
     //程序调试TAG
     public static final String BUGTAG = "TAGTOKGO";
 
-//    public static final String SERVERADRR = "http://3c07b6566169b974.natapp.cc";
+//    public static final String SERVERADRR = "http://hxl.nat300.top";
 
     public static final String SERVERADRR = "http://118.24.6.171:6666";
     //程序剩余时间

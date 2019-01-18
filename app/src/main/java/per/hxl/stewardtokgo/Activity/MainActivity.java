@@ -2,6 +2,7 @@ package per.hxl.stewardtokgo.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,11 +11,17 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.alibaba.fastjson.JSONObject;
 
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import per.hxl.stewardtokgo.Net.HeartbeartService;
+import per.hxl.stewardtokgo.Net.HttpUtil;
+import per.hxl.stewardtokgo.Net.TokgoCallback;
 import per.hxl.stewardtokgo.Net.WsManager;
 import per.hxl.stewardtokgo.R;
 import per.hxl.stewardtokgo.Task.TaskService;
@@ -39,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         //初始化数据的方法
         initData();
         //开启系统监控及心跳服务
-        startService(new Intent(getBaseContext() ,TaskService.class));
-        startService(new Intent(getBaseContext() ,HeartbeartService.class));
+        startForegroundService(new Intent(getBaseContext() ,TaskService.class));
+        startForegroundService(new Intent(getBaseContext() ,HeartbeartService.class));
 
     }
 
@@ -67,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
                     case 2:startActivity(new Intent(getBaseContext(),WordLearnActivity.class));
                         break;
                     case 3:
+                        testmsg();
 //                        startActivity(new Intent(getBaseContext(),PayActivity.class));
-                        wordLearnShow.show("");
                         break;
 //                    case 4:startActivity(new Intent(getBaseContext(), TaskActivity.class));
 //                        break;
@@ -85,6 +92,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void testmsg() {
+        //构建FormBody，传入要提交的参数
+        FormBody formBody = new FormBody.Builder()
+                .add("data", "test msg")
+                .build();
+        HttpUtil.Post(ConstantValue.SERVERADRR + "/tokgo/word/qqmsgtest", formBody, new TokgoCallback() {
+            @Override
+            public void onResponse(String responsedata) { }});
+    }
 
 
     class MyAdapter extends BaseAdapter{

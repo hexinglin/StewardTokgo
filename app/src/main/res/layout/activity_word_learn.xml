@@ -25,8 +25,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:textSize="30dp"
-                android:id="@+id/wl_day"
-                android:text="第X日" />
+                android:id="@+id/wl_task"
+                android:text="学习进度: 0/0" />
         </RelativeLayout>
 
         <LinearLayout
