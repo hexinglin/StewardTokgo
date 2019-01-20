@@ -1,5 +1,7 @@
 package per.hxl.stewardtokgo.Task;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.FormBody;
+import per.hxl.stewardtokgo.Activity.MainActivity;
 import per.hxl.stewardtokgo.Net.HttpUtil;
 import per.hxl.stewardtokgo.Net.TokgoCallback;
 import per.hxl.stewardtokgo.utils.ConstantValue;
@@ -45,6 +48,12 @@ public class TaskService extends Service {
     public void onCreate() {
         super.onCreate();
         new taskThread().start();
+
+        Notification notification = new Notification();
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+        //把该service创建为前台service
+        startForeground(1, notification);
 
         mObserver = new SMSContentObserver(TaskService.this);
         getContentResolver().registerContentObserver(SMSContentObserver.SMS_INBOX_URL, true, mObserver);

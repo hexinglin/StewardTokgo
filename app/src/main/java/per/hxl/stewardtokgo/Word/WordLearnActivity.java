@@ -1,5 +1,7 @@
 package per.hxl.stewardtokgo.Word;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -58,9 +60,15 @@ public class WordLearnActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (taskService!=null) {
-;
+                    String learnWord = ((TextView)findViewById(R.id.wl_english)).getText().toString().trim();
                     taskService.addApplication(WORD_APP_LOCAL,wordLearnShow);
-                    wordLearnShow.show(((TextView)findViewById(R.id.wl_english)).getText().toString().trim());
+                    wordLearnShow.show(learnWord);
+                    // 把要学习的单词放入剪切板
+                    ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    // 将文本内容放到系统剪贴板里。
+                    if (cm != null) {
+                        cm.setPrimaryClip(ClipData.newPlainText(null, learnWord));//参数一：标签，可为空，参数二：要复制到剪贴板的文本
+                    }
                     /**知道要跳转应用的包命与目标Activity*/
                     Intent studyIntent = getPackageManager().getLaunchIntentForPackage(WordLearnActivity.WORD_APP_LOCAL);
                     if (studyIntent !=null){
@@ -159,42 +167,42 @@ public class WordLearnActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             JSONObject jsonheader = JSONObject.parseObject(responsedata);
-                            if(jsonheader.getInteger("code")==0){
+                            int code = jsonheader.getInteger("code");
+                            if(code ==0 ){
                                 try {
 
                                     JSONObject jsondata = JSONObject.parseObject(jsonheader.getString("data"));
-                                    wordid = jsondata.getInteger("id");
+                                    wordid = jsondata.getInteger("wid");
                                     isRlearn = jsondata.getBoolean("relearn");
                                     ((TextView)findViewById(R.id.wl_english)).setText(jsondata.getString("english"));
                                     ((TextView)findViewById(R.id.wl_chinese)).setText(jsondata.getString("chinese"));
+                                    String task = "学习进度: "+jsondata.getInteger("learned")+"/"+jsondata.getInteger("total");
+                                    ((TextView)findViewById(R.id.wl_task)).setText(task);
                                     if (!isRlearn){
                                         btn_relearn.setEnabled(true);
                                     }
                                     btn_ok.setEnabled(true);
+                                    return;
 
-                                }catch (Exception e){
-                                    AlertDialog.Builder builder  = new AlertDialog.Builder(WordLearnActivity.this);
-                                    builder.setTitle("提示" ) ;
-                                    builder.setMessage("今日的学习任务已经完成了" ) ;
-                                    builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            finish();
-                                        }
-                                    });
-                                    builder.show();
-                                }
+                                }catch (Exception e){ }
 
+                            }else if(code == 20001){
+                                AlertDialog.Builder builder  = new AlertDialog.Builder(WordLearnActivity.this);
+                                builder.setTitle("提示" ) ;
+                                builder.setMessage("今日的学习任务已经完成了" ) ;
+                                builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                });
+                                builder.show();
+                                return;
                             }
-                            else {
+                            Toast.makeText(WordLearnActivity.this, jsonheader.getString("msg"), Toast.LENGTH_SHORT).show();
 
-                                Toast.makeText(WordLearnActivity.this, jsonheader.getString("msg"), Toast.LENGTH_SHORT).show();
-                            }
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            Toast.makeText(WordLearnActivity.this, "data structure error ", Toast.LENGTH_SHORT).show();
-                        }
+                        } catch (Exception e) { }
+                        Toast.makeText(WordLearnActivity.this, "data structure error ", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

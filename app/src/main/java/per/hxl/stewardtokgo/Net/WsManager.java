@@ -49,13 +49,13 @@ public class WsManager implements IWsManager {
             mWebSocket = webSocket;
             setCurrentStatus(WsStatus.CONNECTED);
             connected();
-            if (Looper.myLooper() != Looper.getMainLooper()) {
-                //身份验证
-                String account = SPutil.getString(mContext, ConstantValue.USER_ACCOUNT, "");
-                sendMessage("heartbeat\r\n"+account);
-            } else {
-                Log.e("websocket", "服务器连接成功");
-            }
+//            if (Looper.myLooper() != Looper.getMainLooper()) {
+//                //身份验证
+//                String account = SPutil.getString(mContext, ConstantValue.USER_ACCOUNT, "");
+//                sendMessage("heartbeat\r\n"+account);
+//            } else {
+//                Log.e("websocket", "服务器连接成功");
+//            }
         }
 
         @Override
@@ -118,8 +118,7 @@ public class WsManager implements IWsManager {
         @Override
         public void onFailure(WebSocket webSocket, final Throwable t, final Response response) {
             try {
-                // todo 重连
-//                tryReconnect();
+                tryReconnect();
                 Log.e("liusehngjei", "[走的链接失败这里！！！！！！！！！！！！！！！！]");
                 if (Looper.myLooper() != Looper.getMainLooper()) {
                     wsMainHandler.post(new Runnable() {
@@ -282,11 +281,10 @@ public class WsManager implements IWsManager {
             } else if (msg instanceof ByteString) {
                 isSend = mWebSocket.send((ByteString) msg);
             }
-            // todo 尝试重连
-//            //发送消息失败，尝试重连
-//            if (!isSend) {
-//                tryReconnect();
-//            }
+            //发送消息失败，尝试重连
+            if (!isSend) {
+                tryReconnect();
+            }
         }
         return isSend;
     }
