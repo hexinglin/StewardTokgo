@@ -12,7 +12,7 @@ public class ConstantValue {
 
 //    public static final String SERVERADRR = "http://3c07b6566169b974.natapp.cc";
 
-    public static final String SERVERADRR = "http://118.24.6.171:6666";
+    public static final String SERVERADRR = "http://118.24.6.171:1314";
     //程序剩余时间
     public static final String FREETIME = "freetime";
     //用户token
