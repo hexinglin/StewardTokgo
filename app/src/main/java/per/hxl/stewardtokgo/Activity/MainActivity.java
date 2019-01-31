@@ -2,8 +2,6 @@ package per.hxl.stewardtokgo.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Looper;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +9,11 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.alibaba.fastjson.JSONObject;
-
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import per.hxl.stewardtokgo.Net.HeartbeartService;
+import per.hxl.stewardtokgo.Chat.ChatUIActivity;
 import per.hxl.stewardtokgo.Net.HttpUtil;
 import per.hxl.stewardtokgo.Net.TokgoCallback;
-import per.hxl.stewardtokgo.Net.WsManager;
 import per.hxl.stewardtokgo.R;
 import per.hxl.stewardtokgo.Task.TaskService;
 import per.hxl.stewardtokgo.Word.WordChangeActivity;
@@ -47,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         initData();
         //开启系统监控及心跳服务
         startForegroundService(new Intent(getBaseContext() ,TaskService.class));
-        startForegroundService(new Intent(getBaseContext() ,HeartbeartService.class));
+        //todo
+//        startForegroundService(new Intent(getBaseContext() ,HeartbeartService.class));
 
     }
 
@@ -57,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData() {
         //九宫格
-        mTitleStr = new String[]{"个人信息","添加单词","单词学习","充值中心","任务","跑步","商城","程序锁","设置中心"};
+        mTitleStr = new String[]{"个人信息","添加单词","单词学习","充值中心","聊天","跑步","商城","程序锁","设置中心"};
         mDrawableIds = new int[]{R.mipmap.home_3,R.mipmap.temp,R.mipmap.temp,R.mipmap.temp,
                 R.mipmap.home_5, R.mipmap.runicon,R.mipmap.home_8,R.mipmap.home_6,R.mipmap.home_7};
         gv_list.setAdapter(new MyAdapter());
@@ -77,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
                         testmsg();
 //                        startActivity(new Intent(getBaseContext(),PayActivity.class));
                         break;
-//                    case 4:startActivity(new Intent(getBaseContext(), TaskActivity.class));
-//                        break;
+                    case 4:startActivity( new Intent(getBaseContext(),ChatUIActivity.class));
+                        break;
 //                    case 5:startActivity(new Intent(getBaseContext(), MapActivity.class));
 //                        break;
 //                    case 6:startActivity(new Intent(getBaseContext(), ShopActivity.class));
