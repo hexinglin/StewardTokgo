@@ -33,9 +33,9 @@
     <per.hxl.stewardtokgo.view.SettingItemView
         xmlns:Steward="http://schemas.android.com/apk/res/per.hxl.stewardtokgo"
         android:id="@+id/setting_timesw"
-        Steward:destitle="时间悬浮窗设置"
-        Steward:desoff="时间悬浮窗隐藏"
-        Steward:deson="时间悬浮窗显示"
+        Steward:destitle="服务器地址"
+        Steward:desoff="prd环境"
+        Steward:deson="qa环境"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </per.hxl.stewardtokgo.view.SettingItemView>

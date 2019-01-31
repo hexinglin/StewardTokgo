@@ -28,6 +28,8 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void initTimeSW() {
+
+        //临时作为
         siv_timesw = (SettingItemView) findViewById(R.id.setting_timesw);
         siv_timesw.setCheck(SPutil.getBoolean(this, ConstantValue.SHOWSUSPENSIONWINDOW,false));
         siv_timesw.setOnClickListener(new View.OnClickListener() {

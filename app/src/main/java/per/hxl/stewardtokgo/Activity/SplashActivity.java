@@ -14,23 +14,21 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.WindowManager;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
+import per.hxl.stewardtokgo.Chat.ChatUIActivity;
 import per.hxl.stewardtokgo.Login.LoginActivity;
 import per.hxl.stewardtokgo.Login.LoginUtil;
 import per.hxl.stewardtokgo.R;
-import per.hxl.stewardtokgo.Task.TaskService;
 import per.hxl.stewardtokgo.utils.ConstantValue;
 import per.hxl.stewardtokgo.utils.SPutil;
 
 public class SplashActivity extends AppCompatActivity {
 
     private boolean IsReady = false;
-//    private NetClient netcom;
     private final List<String>  allowlist = new ArrayList<>();
     private List<String> forbidlist ;
 
@@ -58,6 +56,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
         initSystemService();
         new DeayTime().start();
     }
@@ -69,6 +68,16 @@ public class SplashActivity extends AppCompatActivity {
 //        //开启程序锁服务
 //        if (SPutil.getBoolean(this, ConstantValue.OPENCLOSEAPPLOCK,false))
 //            startService(new Intent(this,LockService.class));
+
+
+        if (SPutil.getBoolean(this, ConstantValue.SHOWSUSPENSIONWINDOW,false)){
+            ConstantValue.SERVERADRR = "http://118.24.6.171:6666";
+        }else {
+            ConstantValue.SERVERADRR  ="http://118.24.6.171:1314";
+
+        }
+
+
         getPermission();
 
 
