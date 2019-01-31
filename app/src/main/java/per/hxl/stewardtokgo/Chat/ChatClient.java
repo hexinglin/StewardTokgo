@@ -13,7 +13,6 @@ public class ChatClient extends ClientBaseClass {
 
     public ChatClient(NetReceive netReceive) throws IOException {
         this.Connect("118.24.6.171",1315,this);
-//        this.Connect("10.0.2.2",1315,this);
         this.netReceive =netReceive;
     }
 
