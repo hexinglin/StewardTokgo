@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".Chat.ChatUIActivity">
+
+    <include layout="@layout/chat_ui_title_bg" />
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_weight="1.0"
+        android:background="@mipmap/chat_bg_01" >
+
+        <per.hxl.stewardtokgo.view.xlistview.MsgListView
+            android:id="@+id/msg_listView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@null"
+            android:listSelector="@android:color/transparent"
+            android:transcriptMode="normal" />
+
+        <!-- 录音显示UI层 -->
+
+        <FrameLayout
+            android:id="@+id/rcChat_popup"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:visibility="gone" >
+
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                layout="@layout/voice_rcd_hint_window" />
+        </FrameLayout>
+
+
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_chatmain_input"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottombar_bg"
+        android:gravity="center_vertical" >
+
+
+             <ImageButton
+            android:id="@+id/more_btn"
+            android:layout_width="42.0dip"
+            android:layout_height="fill_parent"
+                 android:visibility="gone"
+            android:background="@android:color/transparent"
+            android:paddingLeft="10.0dip"
+            android:src="@drawable/pop_btn_selector" />
+
+        <!-- 文字按钮 -->
+
+        <ImageButton
+            android:id="@+id/ib_chatmain_msg"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chat_setmode_voice_selector" />
+
+        <ImageButton
+            android:id="@+id/face_btn"
+            android:visibility="gone"
+            android:layout_width="42.0dip"
+            android:layout_height="fill_parent"
+            android:background="@android:color/transparent"
+            android:paddingLeft="5.0dip"
+            android:paddingRight="5.0dip"
+            android:src="@drawable/pop_btn_face_selector" />
+
+        <EditText
+            android:id="@+id/msg_et"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6.0dip"
+            android:layout_marginTop="6.0dip"
+            android:layout_weight="1.0"
+            android:background="@drawable/chat_bottombar_input"
+            android:inputType="textMultiLine"
+            android:paddingBottom="4.0dip"
+            android:paddingLeft="10.0dip"
+            android:paddingRight="14.0dip"
+            android:paddingTop="4.0dip"
+            android:textSize="16.0sp" />
+
+        <RelativeLayout
+            android:id="@+id/send_layout"
+            android:layout_width="56.0dip"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left|center"
+            android:clickable="true"
+            android:gravity="center_vertical" >
+
+            <Button
+                android:id="@+id/send_btn"
+                android:layout_width="42.0dip"
+                android:layout_height="34.0dip"
+                android:layout_marginLeft="4.0dip"
+                android:background="@drawable/chat_bottombar_btn_selector"
+                android:enabled="false"
+                android:shadowColor="#ff568ab5"
+                android:shadowDx="0.0"
+                android:shadowDy="-1.0"
+                android:shadowRadius="0.2"
+                android:text="发送"
+                android:textColor="@color/send_btn_textcolor"
+                android:textSize="14.0sp"
+                android:visibility="gone" />
+            <!-- 附件 -->
+
+            <Button
+                android:id="@+id/btn_chat_affix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4.0dip"
+                android:background="@mipmap/show_add_photo_btn"
+                android:shadowColor="#ff568ab5"
+                android:shadowDx="0.0"
+                android:shadowDy="-1.0"
+                android:shadowRadius="0.2"
+                android:textColor="@color/send_btn_textcolor"
+                android:textSize="14.0sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

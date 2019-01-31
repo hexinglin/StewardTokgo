@@ -10,9 +10,9 @@ public class ConstantValue {
     //程序调试TAG
     public static final String BUGTAG = "TAGTOKGO";
 
-//    public static final String SERVERADRR = "http://hxl.nat300.top";
+    public static String SERVERADRR = "http://hxl.nat300.top";
 
-    public static final String SERVERADRR = "http://118.24.6.171:6666";
+//    public static String SERVERADRR = "http://118.24.6.171:6666";
     //程序剩余时间
     public static final String FREETIME = "freetime";
     //用户token

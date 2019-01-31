@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <application
         android:allowBackup="true"
@@ -32,14 +32,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activity.MainActivity"/>
-
+        <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.SettingActivity" />
         <activity android:name=".Activity.AccountActivity" />
         <activity
             android:name=".Word.WordLearnActivity"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
 
         <service android:name=".Task.TaskService" />
 
@@ -53,10 +51,7 @@
 
         <activity android:name=".Word.WordChangeActivity" />
 
-        <service
-            android:name=".Net.HeartbeartService"
-            android:enabled="true"
-            android:exported="true"></service>
+        <activity android:name=".Chat.ChatUIActivity"></activity>
     </application>
 
 </manifest>
