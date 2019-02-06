@@ -50,8 +50,8 @@
             android:exported="false" />
 
         <activity android:name=".Word.WordChangeActivity" />
-
-        <activity android:name=".Chat.ChatUIActivity"></activity>
+        <activity android:name=".Chat.ChatUIActivity" />
+        <activity android:name=".Activity.MemoryActivity"></activity>
     </application>
 
 </manifest>

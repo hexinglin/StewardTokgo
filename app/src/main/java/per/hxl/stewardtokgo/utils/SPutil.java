@@ -34,6 +34,37 @@ public class SPutil {
         return sp.getBoolean(key,defvalue);
     }
 
+
+
+    /**
+     * 写入long变量至sp中
+     * @param context 上下文
+     * @param key 存储节点名称
+     * @param value 存储节点的值 int
+     * */
+    public static void  putlong(Context context,String key,long value){
+        if (sp == null)
+            sp = context.getSharedPreferences("SWconfig", Context.MODE_PRIVATE);
+        sp.edit().putLong(key,value).commit();
+    }
+
+    /**
+     * 读取sp中long变量
+     * @param context 上下文
+     * @param key 存储节点名称
+     * @param defvalue 存储节点的值 int
+     * @return    默认值或者此节点读取到的值
+     * */
+    public static long  getlong(Context context,String key,long defvalue){
+        if (sp == null)
+            sp = context.getSharedPreferences("SWconfig", Context.MODE_PRIVATE);
+        return sp.getLong(key,defvalue);
+    }
+
+
+
+
+
     /**
      * 写入int变量至sp中
      * @param context 上下文

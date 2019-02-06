@@ -41,6 +41,22 @@ public class HttpUtil {
         }
     }
 
+    public static void Put(String url, final TokgoCallback tokgoCallback){
+        try {
+            //构建FormBody，传入要提交的参数
+            FormBody formBody = new FormBody.Builder().build();
+            final Request request = new Request.Builder()
+                    .url(url)
+                    .addHeader("Authorization",getToken(tokgoCallback))
+                    .put(formBody).build();
+            new OkHttpClient().newCall(request).enqueue(tokgoCallback);
+        }catch (Exception  e){
+            if (tokgoCallback.context !=null)
+                Toast.makeText(tokgoCallback.context,"http 请求错误，检查url",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
     public static void Post(String url, FormBody formBody, final TokgoCallback tokgoCallback){
         try {
             final Request request = new Request.Builder()

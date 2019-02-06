@@ -72,12 +72,12 @@ public class SplashActivity extends AppCompatActivity {
 //            startService(new Intent(this,LockService.class));
 
 
-        if (SPutil.getBoolean(this, ConstantValue.SHOWSUSPENSIONWINDOW,false)){
-            ConstantValue.SERVERADRR = "http://118.24.6.171:6666";
-        }else {
-            ConstantValue.SERVERADRR  ="http://118.24.6.171:1314";
-
-        }
+//        if (SPutil.getBoolean(this, ConstantValue.SHOWSUSPENSIONWINDOW,false)){
+//            ConstantValue.SERVERADRR = "http://118.24.6.171:6666";
+//        }else {
+//            ConstantValue.SERVERADRR  ="http://118.24.6.171:1314";
+//
+//        }
 
 
         getPermission();
