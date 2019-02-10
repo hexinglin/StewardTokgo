@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData() {
         //九宫格
-        mTitleStr = new String[]{"个人信息","添加单词","单词学习","充值中心","聊天","跑步","商城","程序锁","设置中心"};
-        mDrawableIds = new int[]{R.mipmap.home_3,R.mipmap.temp,R.mipmap.temp,R.mipmap.temp,
+        mTitleStr = new String[]{"个人信息","添加单词","单词学习","充值中心","聊天","跑步","每日一记","temp","tmep","商城","程序锁","设置中心"};
+        mDrawableIds = new int[]{R.mipmap.home_3,R.mipmap.temp,R.mipmap.temp,R.mipmap.temp,R.mipmap.temp,R.mipmap.temp,R.mipmap.temp,
                 R.mipmap.home_5, R.mipmap.runicon,R.mipmap.home_8,R.mipmap.home_6,R.mipmap.home_7};
         gv_list.setAdapter(new MyAdapter());
         gv_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -69,15 +69,23 @@ public class MainActivity extends AppCompatActivity {
                         testmsg();
 //                        startActivity(new Intent(getBaseContext(),PayActivity.class));
                         break;
-                    case 4:startActivity( new Intent(getBaseContext(),ChatUIActivity.class));
+                    case 4:
+                        startActivity( new Intent(getBaseContext(),ChatUIActivity.class));
                         break;
 //                    case 5:startActivity(new Intent(getBaseContext(), MapActivity.class));
+//                        break;
+                     case 6:
+                         startActivity(new Intent(getBaseContext(), MemoryActivity.class));
+                        break;
+//                    case 6:startActivity(new Intent(getBaseContext(), ShopActivity.class));
+//                        break;
+//                    case 7:startActivity(new Intent(getBaseContext(), LockActivity.class));
 //                        break;
 //                    case 6:startActivity(new Intent(getBaseContext(), ShopActivity.class));
 //                        break;
 //                    case 7:startActivity(new Intent(getBaseContext(), LockActivity.class));
 //                        break;
-                    case 8:startActivity(new Intent(getBaseContext(), SettingActivity.class));
+                    case 11:startActivity(new Intent(getBaseContext(), SettingActivity.class));
                         break;
                 }
             }

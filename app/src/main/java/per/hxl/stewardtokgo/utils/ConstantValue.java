@@ -10,8 +10,9 @@ public class ConstantValue {
     //程序调试TAG
     public static final String BUGTAG = "TAGTOKGO";
 
-    public static String SERVERADRR = "http://118.24.6.171:1314";
-
+//    public static String SERVERADRR = "http://hxl.nat300.top";
+//    public static String SERVERADRR = "http://prd-tokgo-api.tokgo.cn:1314";
+    public static String SERVERADRR = "http://qa-tokgo-api.tokgo.cn:6666";
     //程序剩余时间
     public static final String FREETIME = "freetime";
     //用户token
@@ -35,7 +36,7 @@ public class ConstantValue {
     //今天消耗的总时间
     public static final String TODAYCOST = "todaycosttime";
     //今天时间日期
-    public static final String TODAYTIME = "todaytime";
+    public static final String MEMORYBEGINTIME = "memorybegintime";
     //自定义命名空间标识
     public static final String NAMEWSPACE = "http://schemas.android.com/apk/res/per.hxl.stewardtokgo";
     //购买星币的标记
