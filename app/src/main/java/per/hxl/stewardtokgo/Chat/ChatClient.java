@@ -12,8 +12,8 @@ public class ChatClient extends ClientBaseClass {
     private final NetReceive netReceive;
 
     public ChatClient(NetReceive netReceive) throws IOException {
-        this.Connect("qa-tokgo-api.tokgo.cn",6667,this);
-//        this.Connect("prd-tokgo-api.tokgo.cn",1315,this);
+//        this.Connect("qa-tokgo-api.tokgo.cn",6667,this);
+        this.Connect("prd-tokgo-api.tokgo.cn",1315,this);
 //        this.Connect("10.0.2.2",1315,this);
         this.netReceive =netReceive;
     }
