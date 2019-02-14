@@ -200,7 +200,7 @@ public class WordLearnActivity extends AppCompatActivity {
                                 return;
                             }
                             Toast.makeText(WordLearnActivity.this, jsonheader.getString("msg"), Toast.LENGTH_SHORT).show();
-
+                            return;
                         } catch (Exception e) { }
                         Toast.makeText(WordLearnActivity.this, "data structure error ", Toast.LENGTH_SHORT).show();
                     }

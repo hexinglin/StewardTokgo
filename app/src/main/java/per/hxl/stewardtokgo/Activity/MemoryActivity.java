@@ -69,7 +69,7 @@ public class MemoryActivity extends AppCompatActivity {
                                         return;
                                     }
                                     Toast.makeText(getBaseContext(), jsonheader.getString("msg"), Toast.LENGTH_SHORT).show();
-
+                                    return;
                                 } catch (Exception e) { }
                                 Toast.makeText(getBaseContext(), "data structure error ", Toast.LENGTH_SHORT).show();
                             }
@@ -120,7 +120,7 @@ public class MemoryActivity extends AppCompatActivity {
                                                     return;
                                                 }
                                                 Toast.makeText(getBaseContext(), jsonheader.getString("msg"), Toast.LENGTH_SHORT).show();
-
+                                                return;
                                             } catch (Exception e) { }
                                             Toast.makeText(getBaseContext(), "data structure error ", Toast.LENGTH_SHORT).show();
                                         }
@@ -154,7 +154,7 @@ public class MemoryActivity extends AppCompatActivity {
                                             return;
                                         }
                                         Toast.makeText(getBaseContext(), jsonheader.getString("msg"), Toast.LENGTH_SHORT).show();
-
+                                        return;
                                     } catch (Exception e) { }
                                     Toast.makeText(getBaseContext(), "data structure error ", Toast.LENGTH_SHORT).show();
                                 }
