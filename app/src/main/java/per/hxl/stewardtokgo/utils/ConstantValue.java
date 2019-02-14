@@ -11,8 +11,8 @@ public class ConstantValue {
     public static final String BUGTAG = "TAGTOKGO";
 
 //    public static String SERVERADRR = "http://hxl.nat300.top";
-//    public static String SERVERADRR = "http://prd-tokgo-api.tokgo.cn";
-    public static String SERVERADRR = "http://qa-tokgo-api.tokgo.cn";
+    public static String SERVERADRR = "http://prd-tokgo-api.tokgo.cn";
+//    public static String SERVERADRR = "http://qa-tokgo-api.tokgo.cn";
     //程序剩余时间
     public static final String FREETIME = "freetime";
     //用户token
