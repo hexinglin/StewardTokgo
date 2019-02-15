@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="per.hxl.stewardtokgo.view.SettingItemView">
+    <declare-styleable name="SettingItemView">
         <attr name="destitle" format="string"/>
         <attr name="desoff" format="string"/>
         <attr name="deson" format="string"/>
     </declare-styleable>
 
-    <declare-styleable name="per.hxl.stewardtokgo.view.InfroItemView">
+    <declare-styleable name="SelectItemView">
+        <attr name="title" format="string"/>
+        <attr name="selecttitle" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="InfroItemView">
         <attr name="infrotitle" format="string"/>
         <attr name="infronum" format="integer"/>
     </declare-styleable>
 
-    <declare-styleable name="per.hxl.stewardtokgo.view.TitleItenView">
+    <declare-styleable name="TitleItenView">
         <attr name="mytitle" format="string"/>
     </declare-styleable>
 </resources>

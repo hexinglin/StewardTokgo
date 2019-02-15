@@ -30,15 +30,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </per.hxl.stewardtokgo.view.SettingItemView>
-    <per.hxl.stewardtokgo.view.SettingItemView
+    <per.hxl.stewardtokgo.view.xlistview.SelectItemView
         xmlns:Steward="http://schemas.android.com/apk/res/per.hxl.stewardtokgo"
-        android:id="@+id/setting_timesw"
-        Steward:destitle="服务器地址"
-        Steward:desoff="prd环境"
-        Steward:deson="qa环境"
+        android:id="@+id/setting_httpadrr"
+        Steward:title="服务器地址"
+        Steward:selecttitle="选择使用的环境"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </per.hxl.stewardtokgo.view.SettingItemView>
+    </per.hxl.stewardtokgo.view.xlistview.SelectItemView>
     <per.hxl.stewardtokgo.view.SettingItemView
         xmlns:Steward="http://schemas.android.com/apk/res/per.hxl.stewardtokgo"
         android:id="@+id/setting_studysw"

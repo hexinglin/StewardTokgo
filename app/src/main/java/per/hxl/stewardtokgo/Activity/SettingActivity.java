@@ -9,11 +9,12 @@ import per.hxl.stewardtokgo.R;
 import per.hxl.stewardtokgo.utils.ConstantValue;
 import per.hxl.stewardtokgo.utils.SPutil;
 import per.hxl.stewardtokgo.view.SettingItemView;
+import per.hxl.stewardtokgo.view.xlistview.SelectItemView;
 
 
 public class SettingActivity extends AppCompatActivity {
 
-    private SettingItemView siv_timesw = null;
+    private SelectItemView siv_httpadrr = null;
     private SettingItemView siv_prompttone = null;
     private SettingItemView siv_applock = null;
 
@@ -29,17 +30,18 @@ public class SettingActivity extends AppCompatActivity {
 
     private void initTimeSW() {
 
-        //临时作为
-        siv_timesw = (SettingItemView) findViewById(R.id.setting_timesw);
-        siv_timesw.setCheck(SPutil.getBoolean(this, ConstantValue.SHOWSUSPENSIONWINDOW,false));
-        siv_timesw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean ischeck = siv_timesw.isCheck();
-                SPutil.putBoolean(getBaseContext(),ConstantValue.SHOWSUSPENSIONWINDOW,!ischeck);
-                siv_timesw.setCheck(!ischeck);
-            }
-        });
+        siv_httpadrr = findViewById(R.id.setting_httpadrr);
+        siv_httpadrr.init(ConstantValue.SERVERADRRITEM,ConstantValue.SERVERADRR);
+
+//        siv_timesw.setCheck(SPutil.getBoolean(this, ConstantValue.SHOWSUSPENSIONWINDOW,false));
+//        siv_timesw.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                boolean ischeck = siv_timesw.isCheck();
+//                SPutil.putBoolean(getBaseContext(),ConstantValue.SHOWSUSPENSIONWINDOW,!ischeck);
+//                siv_timesw.setCheck(!ischeck);
+//            }
+//        });
     }
 
     //初始化是否打开提示音

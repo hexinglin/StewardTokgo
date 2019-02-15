@@ -9,10 +9,20 @@ public class ConstantValue {
     public static final Boolean IsBug = false;
     //程序调试TAG
     public static final String BUGTAG = "TAGTOKGO";
-
-//    public static String SERVERADRR = "http://hxl.nat300.top";
+    public static final String[] SERVERADRRITEM =new String[]{
+            "http://prd-tokgo-api.52wywl.top",
+            "http://qa-tokgo-api.52wywl.top",
+            "http://prd-tokgo-api.tokgo.cn",
+            "http://qa-tokgo-api.tokgo.cn"
+    };
     public static String SERVERADRR = "http://prd-tokgo-api.tokgo.cn";
-//    public static String SERVERADRR = "http://qa-tokgo-api.tokgo.cn";
+
+    public static final String SERVERADRRSAVEFALG = "serveradrrsavefalg";
+
+    public static final int CHATQAPORT = 6667;
+    public static final int CHATPRDPORT = 1315;
+
+
     //程序剩余时间
     public static final String FREETIME = "freetime";
     //用户token
