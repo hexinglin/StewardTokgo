@@ -12,7 +12,7 @@ public class ConstantValue {
 
 //    public static String SERVERADRR = "http://hxl.nat300.top";
 //    public static String SERVERADRR = "http://prd-tokgo-api.tokgo.cn";
-    public static String SERVERADRR = "http://qa-tokgo-api.tokgo.cn";
+    public static String SERVERADRR = "http://prd-tokgo-api.52wywl.top";
     //程序剩余时间
     public static final String FREETIME = "freetime";
     //用户token
