@@ -10,11 +10,15 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
+
 import okhttp3.FormBody;
 import per.hxl.stewardtokgo.Chat.ChatUIActivity;
 import per.hxl.stewardtokgo.Net.HttpUtil;
 import per.hxl.stewardtokgo.Net.TokgoCallback;
+import per.hxl.stewardtokgo.Net.TokgoUICallback;
 import per.hxl.stewardtokgo.R;
+import per.hxl.stewardtokgo.Setting.SettingActivity;
 import per.hxl.stewardtokgo.Task.TaskService;
 import per.hxl.stewardtokgo.Word.WordChangeActivity;
 import per.hxl.stewardtokgo.Word.WordLearnActivity;
@@ -44,7 +48,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initUI() {
+        initDate();
         gv_list = (GridView) findViewById(R.id.gv_home);
+
+    }
+
+    private void initDate() {
+        HttpUtil.Get(ConstantValue.SERVERADRR + "/tokgo/todayInfo"
+                , new TokgoUICallback(this, "get todayInfo error") {
+                    @Override
+                    public void onResponse(JSONObject responsedata) {
+                        String date = responsedata.get("date").toString();
+                        ((TextView)findViewById(R.id.home_date)).setText("第"+date+"日");
+                    }
+                });
     }
 
     private void initData() {

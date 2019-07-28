@@ -1,6 +1,8 @@
 package per.hxl.stewardtokgo.Task;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.app.usage.UsageStats;
@@ -8,6 +10,8 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
@@ -20,6 +24,7 @@ import okhttp3.FormBody;
 import per.hxl.stewardtokgo.Activity.MainActivity;
 import per.hxl.stewardtokgo.Net.HttpUtil;
 import per.hxl.stewardtokgo.Net.TokgoCallback;
+import per.hxl.stewardtokgo.R;
 import per.hxl.stewardtokgo.utils.ConstantValue;
 
 /**
@@ -48,18 +53,40 @@ public class TaskService extends Service {
     public void onCreate() {
         super.onCreate();
         new taskThread().start();
-
-        Notification notification = new Notification();
-        Intent notificationIntent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-        //把该service创建为前台service
-        startForeground(1, notification);
+        OpenTaskService();
 
         mObserver = new SMSContentObserver(TaskService.this);
         getContentResolver().registerContentObserver(SMSContentObserver.SMS_INBOX_URL, true, mObserver);
 
     }
 
+    private void OpenTaskService() {
+        String CHANNEL_ONE_ID = "CHANNEL_ONE_ID";
+        String CHANNEL_ONE_NAME= "CHANNEL_ONE_ID";
+        NotificationChannel notificationChannel= null;
+        //进行8.0的判断
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            notificationChannel= new NotificationChannel(CHANNEL_ONE_ID,
+                    CHANNEL_ONE_NAME, NotificationManager.IMPORTANCE_HIGH);
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.setShowBadge(true);
+            notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+            NotificationManager manager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            manager.createNotificationChannel(notificationChannel);
+        }
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pendingIntent= PendingIntent.getActivity(this, 0, intent, 0);
+        Notification notification= new Notification.Builder(this).setChannelId(CHANNEL_ONE_ID)
+                .setTicker("Nature")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("星梦管家后台运行中")
+                .setContentIntent(pendingIntent)
+                .build();
+        notification.flags|= Notification.FLAG_NO_CLEAR;
+        startForeground(1, notification);
+    }
 
     class taskThread extends Thread{
     @Override

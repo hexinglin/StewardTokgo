@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.SettingActivity">
+    tools:context=".Setting.SettingActivity">
     <per.hxl.stewardtokgo.view.TitleItenView
         xmlns:Steward="http://schemas.android.com/apk/res/per.hxl.stewardtokgo"
         android:layout_width="match_parent"
@@ -30,6 +30,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </per.hxl.stewardtokgo.view.SettingItemView>
+    <RelativeLayout
+        android:id="@+id/setting_ServerUrl"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:text="服务器地址配置"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:background="#000"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+    </RelativeLayout>
+
     <per.hxl.stewardtokgo.view.SettingItemView
         xmlns:Steward="http://schemas.android.com/apk/res/per.hxl.stewardtokgo"
         android:id="@+id/setting_timesw"

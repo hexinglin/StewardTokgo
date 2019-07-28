@@ -22,6 +22,7 @@ import com.alibaba.fastjson.JSONObject;
 import okhttp3.FormBody;
 import per.hxl.stewardtokgo.Net.HttpUtil;
 import per.hxl.stewardtokgo.Net.TokgoCallback;
+import per.hxl.stewardtokgo.Net.TokgoUICallback;
 import per.hxl.stewardtokgo.R;
 import per.hxl.stewardtokgo.Task.TaskService;
 import per.hxl.stewardtokgo.utils.ConstantValue;
@@ -87,29 +88,13 @@ public class WordLearnActivity extends AppCompatActivity {
                 FormBody formBody = new FormBody.Builder()
                         .add("id", wordid.toString()).build();
                 HttpUtil.Put(ConstantValue.SERVERADRR + "/tokgo/word/relearn", formBody
-                        , new TokgoCallback(WordLearnActivity.this, "put relearn error") {
-                    @Override
-                    public void onResponse(final String responsedata) {
-                        runOnUiThread(new Runnable() {
+                        , new TokgoUICallback(WordLearnActivity.this, "put relearn error") {
                             @Override
-                            public void run() {
-                                try {
-                                    JSONObject jsonheader = JSONObject.parseObject(responsedata);
-                                    if (jsonheader.getInteger("code") == 0) {
-                                        Toast.makeText(WordLearnActivity.this, jsonheader.getInteger("设置成功"), Toast.LENGTH_SHORT).show();
-                                        isRlearn = true;
-                                        btn_relearn.setEnabled(false);
-                                    } else {
-                                        Toast.makeText(WordLearnActivity.this, jsonheader.getString("msg"), Toast.LENGTH_SHORT).show();
-                                    }
-                                } catch (Exception e) {
-                                    Looper.prepare();
-                                    Toast.makeText(WordLearnActivity.this, "data structure error ", Toast.LENGTH_SHORT).show();
-                                    Looper.loop();
-                                }
+                            public void onResponse(JSONObject responsedata) {
+                                Toast.makeText(WordLearnActivity.this, responsedata.getInteger("设置成功"), Toast.LENGTH_SHORT).show();
+                                isRlearn = true;
+                                btn_relearn.setEnabled(false);
                             }
-                        });
-                    }
                 });
             }
         });
@@ -128,28 +113,12 @@ public class WordLearnActivity extends AppCompatActivity {
                 FormBody formBody = new FormBody.Builder()
                         .add("id", wordid.toString()).build();
                 HttpUtil.Put(ConstantValue.SERVERADRR + "/tokgo/word/learning", formBody
-                        , new TokgoCallback(WordLearnActivity.this, "put learning error") {
-                    @Override
-                    public void onResponse(final String responsedata) {
-                        runOnUiThread(new Runnable() {
+                        , new TokgoUICallback(WordLearnActivity.this, "put learning error") {
                             @Override
-                            public void run() {
-                                try {
-                                    JSONObject jsonheader = JSONObject.parseObject(responsedata);
-                                    if(jsonheader.getInteger("code")==0){
-                                        wordLearnShow.notShow();
-                                        getWord();
-                                    }
-                                    else {
-                                        Toast.makeText(WordLearnActivity.this, jsonheader.getString("msg"), Toast.LENGTH_SHORT).show();
-                                    }
-
-                                } catch (Exception e) {
-                                    Toast.makeText(WordLearnActivity.this, "data structure error ", Toast.LENGTH_SHORT).show();
-                                }
+                            public void onResponse(JSONObject responsedata) {
+                                wordLearnShow.notShow();
+                                getWord();
                             }
-                        });
-                    }
                 });
             }
         });

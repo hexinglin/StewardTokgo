@@ -17,6 +17,7 @@ import java.util.Date;
 import okhttp3.FormBody;
 import per.hxl.stewardtokgo.Net.HttpUtil;
 import per.hxl.stewardtokgo.Net.TokgoCallback;
+import per.hxl.stewardtokgo.Net.TokgoUICallback;
 import per.hxl.stewardtokgo.R;
 import per.hxl.stewardtokgo.utils.ConstantValue;
 import per.hxl.stewardtokgo.utils.SPutil;
@@ -95,39 +96,24 @@ public class MemoryActivity extends AppCompatActivity {
         btn_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (CheckInput()){
-                    HttpUtil.Put(ConstantValue.SERVERADRR + "/tokgo/memory/finish/"+contentid
-                            , new TokgoCallback(getBaseContext(), "put error") {
-                                @Override
-                                public void onResponse(final String responsedata) {
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            try {
-                                                JSONObject jsonheader = JSONObject.parseObject(responsedata);
-                                                int code = jsonheader.getInteger("code");
-                                                if(code ==0 ){
-                                                    AlertDialog.Builder builder  = new AlertDialog.Builder(MemoryActivity.this);
-                                                    builder.setTitle("提示" ) ;
-                                                    builder.setMessage("今日的学习任务已经完成了" ) ;
-                                                    builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(DialogInterface dialog, int which) {
-                                                            finish();
-                                                        }
-                                                    });
-                                                    builder.show();
-                                                    return;
-                                                }
-                                                Toast.makeText(getBaseContext(), jsonheader.getString("msg"), Toast.LENGTH_SHORT).show();
-                                                return;
-                                            } catch (Exception e) { }
-                                            Toast.makeText(getBaseContext(), "data structure error ", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                }
-                            });
-                }
+            if (CheckInput()){
+                HttpUtil.Put(ConstantValue.SERVERADRR + "/tokgo/memory/finish/"+contentid
+                        , new TokgoUICallback(MemoryActivity.this, "put error") {
+                            @Override
+                            public void onResponse(JSONObject responsedata) {
+                                AlertDialog.Builder builder  = new AlertDialog.Builder(MemoryActivity.this);
+                                builder.setTitle("提示" ) ;
+                                builder.setMessage("今日的学习任务已经完成了" ) ;
+                                builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                });
+                                builder.show();
+                            }
+                        });
+            }
             }
         });
 

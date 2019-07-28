@@ -18,6 +18,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,7 @@ import per.hxl.stewardtokgo.Chat.ChatUIActivity;
 import per.hxl.stewardtokgo.Login.LoginActivity;
 import per.hxl.stewardtokgo.Login.LoginUtil;
 import per.hxl.stewardtokgo.R;
+import per.hxl.stewardtokgo.Setting.ServerURLActivity;
 import per.hxl.stewardtokgo.utils.ConstantValue;
 import per.hxl.stewardtokgo.utils.SPutil;
 
@@ -57,10 +60,21 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setServerAdrr();
         setContentView(R.layout.activity_splash);
-
         initSystemService();
         new DeayTime().start();
+    }
+
+    private void setServerAdrr() {
+        try {
+            String spURLStr = SPutil.getString(getBaseContext(), ConstantValue.SERVERADRR_LIST_STR,"");
+            List<String> mRULStr = JSONObject.parseArray(spURLStr,String.class);
+            int pos = SPutil.getint(getBaseContext(), ConstantValue.SERVERADRR_POS,0);
+            if (mRULStr != null || mRULStr.size() != 0){
+                ConstantValue.SERVERADRR = mRULStr.get(pos);
+            }
+        }catch (Exception e){ }
     }
 
     /**

@@ -1,4 +1,4 @@
-package per.hxl.stewardtokgo.Activity;
+package per.hxl.stewardtokgo.Setting;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import per.hxl.stewardtokgo.R;
+import per.hxl.stewardtokgo.Word.WordChangeActivity;
 import per.hxl.stewardtokgo.utils.ConstantValue;
 import per.hxl.stewardtokgo.utils.SPutil;
 import per.hxl.stewardtokgo.view.SettingItemView;
@@ -22,9 +23,20 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         initUI();
+        initSeverAddr();
         initPrompttone();
         initTimeSW();
         initapplock();
+    }
+
+    private void initSeverAddr() {
+        findViewById(R.id.setting_ServerUrl).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), ServerURLActivity.class));
+            }
+        });
+
     }
 
     private void initTimeSW() {

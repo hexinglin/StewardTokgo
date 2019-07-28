@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSONObject;
 import okhttp3.FormBody;
 import per.hxl.stewardtokgo.Net.HttpUtil;
 import per.hxl.stewardtokgo.Net.TokgoCallback;
+import per.hxl.stewardtokgo.Net.TokgoUICallback;
 import per.hxl.stewardtokgo.R;
 import per.hxl.stewardtokgo.utils.ConstantValue;
 
@@ -52,23 +53,13 @@ public class WordChangeActivity extends AppCompatActivity {
                         .add("english", english)
                         .add("chinese",chinese)
                         .build();
-                HttpUtil.Post(ConstantValue.SERVERADRR + "/tokgo/word/", formBody, new TokgoCallback(WordChangeActivity.this,"add word error") {
+                HttpUtil.Post(ConstantValue.SERVERADRR + "/tokgo/word/", formBody
+                        , new TokgoUICallback(WordChangeActivity.this,"add word error") {
                     @Override
-                    public void onResponse(String responsedata) {
-                        Looper.prepare();
-                        try {
-                            JSONObject jsonheader = JSONObject.parseObject(responsedata);
-                            if(jsonheader.getInteger("code")==0){
-                                et_english.setText("");
-                                et_chinese.setText("");
-                                Toast.makeText(WordChangeActivity.this, "add word ok ", Toast.LENGTH_SHORT).show();
-                            }else
-                                Toast.makeText(WordChangeActivity.this, "add word error ", Toast.LENGTH_SHORT).show();
-                        } catch (Exception e) {
-                            Toast.makeText(WordChangeActivity.this, "data structure error ", Toast.LENGTH_SHORT).show();
-                        }
-                        Looper.loop();
-
+                    public void onResponse(JSONObject responsedata) {
+                        et_english.setText("");
+                        et_chinese.setText("");
+                        Toast.makeText(WordChangeActivity.this, "add word ok ", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

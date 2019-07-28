@@ -14,6 +14,19 @@
         <TextView
             android:text="功能列表"
             style="@style/titlestyle"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/holo_blue">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="第1243日"
+                android:textSize="23dp"
+                android:id="@+id/home_date"/>
+        </RelativeLayout>
+
         <GridView
             android:id="@+id/gv_home"
             android:numColumns="3"
